@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task 3 – Integrated Demo</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header><h1>Advanced Web Page Demo</h1></header>
+  <main>
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+      <h2>Image Carousel</h2>
+      <div class="carousel">
+        <button onclick="prevImage()">⟨</button>
+        <img id="carouselImage" src="" alt="Carousel"/>
+        <button onclick="nextImage()">⟩</button>
+      </div>
+    </section>
+
+    <!-- Weather Section -->
+    <section class="weather-section">
+      <h2>Weather Check</h2>
+      <input type="text" id="cityInput" placeholder="Enter city name"/>
+      <button onclick="getWeather()">Get Weather</button>
+      <p id="weatherResult"></p>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-section">
+      <h2>Quiz Time</h2>
+      <p>What is the capital of France?</p>
+      <button onclick="checkAnswer('Paris')">Paris</button>
+      <button onclick="checkAnswer('Rome')">Rome</button>
+      <button onclick="checkAnswer('Berlin')">Berlin</button>
+      <p id="quizResult"></p>
+    </section>
+  </main>
+  <footer><p>&copy; 2025 Your Name</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
