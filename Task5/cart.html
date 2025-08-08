@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujata's Store - Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Sujata's Store</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="profile.html">Profile</a>
+            </nav>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <h1>Your Cart</h1>
+        <div class="cart-container">
+            <div id="cart-items"></div>
+            <div class="total-section">
+                <h3>Total:</h3>
+                <h3 id="total"></h3>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const cartContainer = document.getElementById("cart-items");
+        const totalElement = document.getElementById("total");
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let totalPrice = 0;
+
+            cartContainer.innerHTML = ""; // Clear existing cart items
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = "<p class='empty-cart'>Your cart is empty.</p>";
+                totalElement.textContent = "₹0";
+            } else {
+                cart.forEach((item, index) => {
+                    totalPrice += item.price * item.quantity;
+                    const cartItem = document.createElement("div");
+                    cartItem.classList.add("cart-item");
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <p class="price">Price: ₹${item.price}</p>
+                        </div>
+                        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                    `;
+                    cartContainer.appendChild(cartItem);
+                });
+                totalElement.textContent = "₹" + totalPrice;
+            }
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart(); // Re-render the cart after removal
+        }
+
+        // Initial render when the page loads
+        renderCart();
+    </script>
+
+</body>
+</html>
